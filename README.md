@@ -12,11 +12,11 @@ Just start your project normally with
 
 `npx creat-react-app new-testing-project`
 
-`cd` into the project and open it in a text editor. Navigate tyo the `package.json`, where you can see the test library for Jest is already installed.
+`cd` into the project and open it in a text editor. Navigate to the `package.json`, where you will see that the test library for Jest is already installed.
 
-In fact, the default app in React already has a test built in, and so you can run one straight away.
+In fact, the default `App.js` in React already has a test built in, and so you can run one straight away. You can find the test in `App.test.js` to get a sense of the syntax. The basic test is checking whether the app renders link to learn React.
 
-The test is found in `app.tests.js` and it is testing whether the default app renders a react link. You can run `npm run test` in the console, and see the test run. As long as you have not  made any changes to the app, it should pass:
+ To start the test you can run `npm test -- --watch ` in the console, and see the test run. As long as you have not  made any changes to the app, it should pass:
 
 ![A screen shot showing a passing test](./public/readme-img/pass-example.png)
 
@@ -33,7 +33,7 @@ You can start with some really basic tests, just to see whether a component is r
 
 I started by building a component, `<Dashboard/>` that was going to be my main page, allowing the user to select ingredients whhich would be later sent as an API request for recipes.
 
-To begin with, I simply set a basic <h1> title and a basic test
+To begin with, I simply set a h1 heading and a basic test:
 
 ```Javascript
     import Dashboard from "../Components/Dashboard";
@@ -48,9 +48,9 @@ To begin with, I simply set a basic <h1> title and a basic test
 
 ```
 
-This test will `pass` if the component renders, which it should if you have exported it to `App.js`.
+This test will `pass` if the component renders (which it should if you have exported it to `App.js`).
 
-Of course, we need our component to do more than just render, so now we can start to test whether other features on the page that are also present. We can write our first test with `expect`, which checks whether something we, well, *expect* is on the page. Here we test that the title says 'Welcome to Foodle'
+Of course, we need our component to do more than just render, so now we can start to test whether other features on the page that are also present. We can write our first test with `expect`, which checks whether something, well, we *expect* to be on the page actually is. Here we test that the title says 'Welcome to Foodle':
 
 ```JavaScript
 
@@ -59,17 +59,30 @@ test('Renders the Dashboard', () => {
     expect(screen.getByRole("heading")).toHaveTextContent(/Welcome to Foodle/);
 })
 
-
 ```
 
-This wil pass because we have out heading already on the page and we are now ready to take the leap into full-blow Test Driven Development, by writing a test we know will not pass:
+This will pass because the heading is already on the page. But we want to use our testing to drive our development foward, so we can take the leap towards Test Driven Development.
+
+## Test Driven Developemnt (TDD)
+
+Test Driven Development is a software development process where it is the test themselves that help to propel the coding forward. Essentially, we use a process of 
+
+Write a test --> Fail the test --> Write the **least** amount of code to enable the test to pass --> Refactor --> Write the next test
+
+In this we we move from <span style="color:red">red</span> (failing) to <span style="color:green">green</span> (passing).
+
+While this process is slower than writing code, the benefits are that the tests become a documentation in its own write, and, of course, less bugs and errors in your code base. 
+
+As an example, lets return to our `</Dashboard>` component. If we were to add a test to see whether an input field renders on the page, it would initially fail (because we haven't built it yet!)
 
 ```JavaScript
     //...
-     expect(screen.getByRole("inputfield")).toHavePlaceholderText("What is in your fridge?");
-     
+    expect(screen.getByRole("textbox")).toBeInTheDocument()
+    
 
 ```
+
+Now we are in the red, we just need to create a textbox input field to pass this test.
 
 # Getting Started with Create React App
 
