@@ -63,7 +63,7 @@ test('Renders the Dashboard', () => {
 
 This will pass because the heading is already on the page. But we want to use our testing to drive our development foward, so we can take the leap towards Test Driven Development.
 
-## Test Driven Developemnt (TDD)
+## Test Driven Development (TDD)
 
 Test Driven Development is a software development process where it is the test themselves that help to propel the coding forward. Essentially, we use a process of 
 

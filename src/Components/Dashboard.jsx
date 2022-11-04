@@ -7,13 +7,13 @@ const Dashboard = () => {
             <h1>Welcome to Foodle</h1>
             <div className="search">
                 <input type='text' placeholder='What is in your fridge?'></input>
-                <button>Add</button>
+                <button>Add Ingredient</button>
                 <button>What can I cook?</button>
             </div>
 
 
         </div>
-
+    
     )
 
 

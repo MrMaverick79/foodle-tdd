@@ -9,7 +9,9 @@ test('Renders the Dashboard', () => {
 
     expect(screen.getByRole("heading")).toHaveTextContent(/Welcome to Foodle/);
     expect(screen.getByRole("textbox")).toBeInTheDocument()
-    expect(screen.getByRole("button")).toBeInTheDocument()
+    expect(screen.getByText(/What can I/)).toBeInTheDocument()
+    expect(screen.getByText(/Add/)).toBeInTheDocument()
+
 
     //expect statement for ingredients list (provided) and ingfredients list (selected by the user)
 
@@ -18,11 +20,12 @@ test('Renders the Dashboard', () => {
 });
 
 //Atempting to test for a button click. Can change to mocking an API request later
-it('Registers a button click', async()=> {
+it('Registers a button click', ()=> {
     const user = userEvent
     render(<Dashboard/>);
 
-    await user.click(screen.getByRole('button' ))
+    user.click(screen.getByText(/What can I/ ))
+    user.click(screen.getByText(/Add/ ))
 
     //Check that the ingredients are being added.
 
