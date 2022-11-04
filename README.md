@@ -82,7 +82,7 @@ As an example, lets return to our `</Dashboard>` component. If we were to add a 
 
 ```
 
-Now we are in the red, we just need to create a textbox input field to pass this test.
+Now we are in the red, we just need to create a textbox input field to pass this test and get back to the green. 
 
 # Getting Started with Create React App
 
