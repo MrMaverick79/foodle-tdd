@@ -1,8 +1,9 @@
 import Dashboard from "../Components/Dashboard";
-import { screen, render } from "@testing-library/react";
+import { cleanup, screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import renderer from 'react-test-renderer'
 
-
+afterEach(cleanup);
 
 test('Renders the Dashboard', () => {
     render(<Dashboard/>);
@@ -12,10 +13,7 @@ test('Renders the Dashboard', () => {
     expect(screen.getByText(/What can I/)).toBeInTheDocument()
     expect(screen.getByText(/Add/)).toBeInTheDocument()
 
-
-    //expect statement for ingredients list (provided) and ingfredients list (selected by the user)
-
-    //Expect a search button (ass oppposed to an add button)
+   
     
 });
 
@@ -29,6 +27,25 @@ it('Registers a button click', ()=> {
 
     //Check that the ingredients are being added.
 
+
+
+})
+
+it('Adds a new list item to the list',  async()=> {
+
+    const user = userEvent
+     const dash = render(<Dashboard/>)
+    //User event
+
+    //Grab the input field and set a value
+    let ingredientInput = dash.getByRole('textbox')
+
+    user.click(dash.getByText(/Add/ ))
+
+    // post click --expect Li to appear
+    expect(screen.getByRole("list")).toBeInTheDocument();
+    //Also expect that the input is now empty
+    expect(ingredientInput.value).toBe("")
 
 
 })
