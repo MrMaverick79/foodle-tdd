@@ -1,12 +1,32 @@
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const Dashboard = () => {
+
+    const BASE_URL = process.env.REACT_APP_BASE_URL
+    const APP_ID = process.env.REACT_APP_ID
+    const APP_KEY= process.env.REACT_APP_KEY
 
     const [ingredientList, setIngredientList] = useState([])
 
     const [currentIngredient, setCurrentIngredient] = useState("")
 
+    const [recipeList, setRecipeList] = useState({})
 
+    async function fetchRecipes() {
+        
+        //might need to map over the query terms here
+        try{
+            const res = await axios.get(`${BASE_URL}&q=${ingredientList}&app_key=${APP_KEY}&app_id=${APP_ID}`)
+
+            setRecipeList(res.data);
+
+
+        } catch ( err ){
+            console.log('There has been an error trying to access the API', err);
+        }
+
+    }
 
     function handleChange(e) {
         setCurrentIngredient(e.target.value)
@@ -17,7 +37,7 @@ const Dashboard = () => {
     function addIngredient(e){
         //prevent refresh
         e.preventDefault()
-
+        setIngredientList([...ingredientList, currentIngredient])
         //Add the ingredient to the DOM
         let ul = document.getElementById("ingredients")
         let li = document.createElement('li');
@@ -45,7 +65,7 @@ const Dashboard = () => {
                 '></input>
                 <button
                 onClick={addIngredient}>Add Ingredient</button>
-                <button>What can I cook?</button>
+                <button onClick={fetchRecipes}>What can I cook?</button>
             </div>
             <div className="ingredientList">
                 <ul id="ingredients">
@@ -61,5 +81,6 @@ const Dashboard = () => {
 
 
 };
+
 
 export default Dashboard

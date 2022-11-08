@@ -4,9 +4,11 @@
 
 ## About
 
-This project was done via Test Driven Development with Jest, and an exmplar project.
+This project was is an example of Test Driven Development using Jest. The app itself takes user input and makes a request to an external API ([edamam](https://www.edamam.com)) and then displays recipes based on search parameters.
 
 ## Steps
+
+*NB: I'm using `npm` with this project, so if you are using `yarn` you will need to adjust some of the instructions.* 
 
 Just start your project normally with 
 
@@ -36,6 +38,7 @@ I started by building a component, `<Dashboard/>` that was going to be my main p
 To begin with, I simply set a h1 heading and a basic test:
 
 ```Javascript
+
     import Dashboard from "../Components/Dashboard";
     import { screen, render } from "@testing-library/react";
 
@@ -54,10 +57,10 @@ Of course, we need our component to do more than just render, so now we can star
 
 ```JavaScript
 
-test('Renders the Dashboard', () => {
-    render(<Dashboard/>);
-    expect(screen.getByRole("heading")).toHaveTextContent(/Welcome to Foodle/);
-})
+    test('Renders the Dashboard', () => {
+        render(<Dashboard/>);
+        expect(screen.getByRole("heading")).toHaveTextContent(/Welcome to Foodle/);
+    })
 
 ```
 
@@ -67,11 +70,11 @@ This will pass because the heading is already on the page. But we want to use ou
 
 Test Driven Development is a software development process where it is the test themselves that help to propel the coding forward. Essentially, we use a process of 
 
-Write a test --> Fail the test --> Write the **least** amount of code to enable the test to pass --> Refactor --> Write the next test
+Write a test --> Fail the test --> Write the **least** amount of code to enable the test to pass --> Refactor --> Write the next test --> ...
 
-In this we we move from <span style="color:red">red</span> (failing) to <span style="color:green">green</span> (passing).
+In this process we we move from <span style="color:red">red</span> (failing) to <span style="color:green">green</span> (passing) and then repeat the process.
 
-While this process is slower than writing code, the benefits are that the tests become a documentation in its own write, and, of course, less bugs and errors in your code base. 
+While this process is slower than simply writing code, the benefits are that the tests become a documentation in its own right, and, of course, you should have less bugs and errors.  Probably the biggest benefits from this testing are only appoarent when the project is much larger and has many different devs working on many different aspects, and the tests ensure no change impacts the functionlaity of another component or function.
 
 As an example, lets return to our `</Dashboard>` component. If we were to add a test to see whether an input field renders on the page, it would initially fail (because we haven't built it yet!)
 
@@ -83,6 +86,21 @@ As an example, lets return to our `</Dashboard>` component. If we were to add a 
 ```
 
 Now we are in the red, we just need to create a textbox input field to pass this test and get back to the green. 
+
+Jump back into the code, add an `<input type="text">` to the `Dashboard.jsx` file and the test should pass.
+
+## More complex testing: Mocking an API request
+
+Our component is going to make a request to an external API, so we need to be able to fake (or **mock**) the request and the results.
+
+To get started, we will need to make sure we have installed axios, which will handle our requests:
+
+`npm i axios`
+
+We could jsut write an axios request and test whether it returns, but there are many reasons that the request might fail--and many of those are due to the API itself, not the code. Instead, we need to mock a request.
+
+For this, I am endebted to [Zack Laughton](https://zaklaughton.dev/blog/the-only-3-steps-you-need-to-mock-an-api-call-in-jest)for his excellent blog post on the steps needed to achieve this.
+
 
 # Getting Started with Create React App
 
