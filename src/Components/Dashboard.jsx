@@ -11,7 +11,7 @@ const Dashboard = () => {
 
     const [currentIngredient, setCurrentIngredient] = useState("")
 
-    const [recipeList, setRecipeList] = useState({})
+    const [recipeList, setRecipeList] = useState()
 
     async function fetchRecipes() {
         
@@ -19,13 +19,14 @@ const Dashboard = () => {
         try{
             const res = await axios.get(`${BASE_URL}&q=${ingredientList}&app_key=${APP_KEY}&app_id=${APP_ID}`)
 
-            setRecipeList(res.data);
+            setRecipeList(res.data)
+        
 
 
         } catch ( err ){
             console.log('There has been an error trying to access the API', err);
         }
-
+        
     }
 
     function handleChange(e) {
@@ -52,6 +53,30 @@ const Dashboard = () => {
         
 
     }
+
+    async function displayRecipes(){
+        console.log('I am displaying recipes');
+        for (let i = 0; i < recipeList.hits.length; i++) {
+            console.log(recipeList.hits[i]);
+            return(
+                <div>
+                    <h2>{recipeList.hits[i].recipe.label}</h2>
+
+                </div>
+            )
+            
+        }
+        
+
+        console.log(recipeList.hits.length);
+    }
+
+    useEffect(() =>{
+        
+        console.log('useEffect has changed');
+        displayRecipes()
+
+    });
 
 
     return (
